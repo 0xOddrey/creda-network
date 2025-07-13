@@ -17,10 +17,15 @@ const chain = process.env.NEXT_PUBLIC_CHAIN_ID as any;
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <CrossmintProvider apiKey={process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_API_KEY || ""}>
+      <CrossmintProvider 
+        apiKey={process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_API_KEY || ""}
+      >
         <CrossmintAuthProvider
-          authModalTitle="Fintech Starter App"
+          authModalTitle="Creda Network"
           loginMethods={["email", "google"]}
+          embeddedAuth={{
+            type: "embedded-wallet"
+          }}
         >
           <CrossmintWalletProvider
             showPasskeyHelpers={chain !== "solana"}

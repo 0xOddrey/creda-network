@@ -58,7 +58,7 @@ export function Modal({
             </div>
           )}
           {showCloseButton && (
-            <button onClick={onClose} className="absolute right-0">
+            <button onClick={onClose} className="absolute right-0 tap-target flex items-center justify-center">
               <XMarkIcon className="h-5 w-5" />
             </button>
           )}

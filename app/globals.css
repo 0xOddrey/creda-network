@@ -2,25 +2,38 @@
 @import "tw-animate-css";
 
 :root {
-  --radius: 0.625rem;
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #30d55d;
-  --primary-hover: #26a64b;
-  --primary-foreground: oklch(100% 0 0);
-  --secondary: #000000;
-  --secondary-foreground: oklch(100% 0 0);
+  --radius: 1.5rem;
+  --radius-button: 0.75rem;
+  --radius-small: 0.5rem;
+  --background: #e2e6ff;
+  --foreground: #141414;
+  --card: #ffffff;
+  --card-foreground: #141414;
+  --card-accent: #d9e300;
+  --popover: #ffffff;
+  --popover-foreground: #141414;
+  --primary: #c8ff00;
+  --primary-hover: #b3e600;
+  --primary-foreground: #141414;
+  --secondary: #141414;
+  --secondary-foreground: #ffffff;
   --muted: oklch(95.97% 0.011 196.98);
   --muted-foreground: oklch(36.35% 0.063 215.72);
-  --accent: oklch(68.76% 0.1856 150.65);
-  --accent-foreground: oklch(60.29% 0 0);
+  --accent: #d9e300;
+  --accent-foreground: #141414;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.9288 0.013 255.51);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #c8ff00;
+  --shadow-1: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-2: 0 4px 16px rgba(0,0,0,0.12);
+  --shadow-3: 0 8px 24px rgba(0,0,0,0.16);
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -37,14 +50,15 @@
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: var(--radius-small);
+  --radius-md: var(--radius-button);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-card-accent: var(--card-accent);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -81,10 +95,152 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
 
   button:not([disabled]),
   [role="button"]:not([disabled]) {
     cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .shadow-level-1 {
+    box-shadow: var(--shadow-1);
+  }
+  .shadow-level-2 {
+    box-shadow: var(--shadow-2);
+  }
+  .shadow-level-3 {
+    box-shadow: var(--shadow-3);
+  }
+  
+  /* Mobile responsive utilities */
+  .tap-target {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+  
+  @media (max-width: 768px) {
+    .text-mobile-sm {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@layer components {
+  /* Button components */
+  .btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-radius: var(--radius-button);
+    transition: all 200ms;
+    min-height: 3.125rem;
+    padding: 0 1.5rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: var(--shadow-2);
+  }
+  
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @media (min-width: 768px) {
+    .btn-primary {
+      min-height: 3.5rem;
+    }
+  }
+  
+  .btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    border-radius: var(--radius-button);
+    transition: all 200ms;
+    min-height: 3.125rem;
+    padding: 0 1.5rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--secondary);
+    opacity: 0.9;
+    box-shadow: var(--shadow-2);
+  }
+  
+  .btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @media (min-width: 768px) {
+    .btn-secondary {
+      min-height: 3.5rem;
+    }
+  }
+  
+  /* Card components */
+  .card {
+    background-color: var(--card);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-1);
+  }
+  
+  @media (min-width: 768px) {
+    .card {
+      padding: 1.5rem;
+    }
+  }
+  
+  .card-accent {
+    background-color: var(--card-accent);
+    color: var(--accent-foreground);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .card-accent {
+      padding: 1.5rem;
+    }
+  }
+  
+  /* Animation utilities */
+  .animate-smooth {
+    transition: all 300ms ease-out;
+  }
+  
+  .animate-smooth-in {
+    transition: all 200ms ease-in;
+  }
+  
+  .animate-smooth-inout {
+    transition: all 250ms ease-in-out;
   }
 }

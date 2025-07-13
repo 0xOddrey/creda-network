@@ -21,22 +21,22 @@ interface NewProductProps {
 
 const NewProduct = ({ title, description, image }: NewProductProps) => {
   return (
-    <Container className="flex flex-1 justify-between">
+    <div className="card-accent flex flex-1 justify-between">
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center">
           <img className="w-fit" src={image} alt={title} />
         </div>
         <div>
           <div className="text-base font-semibold">{title}</div>
-          <div className="text-sm text-slate-500">{description}</div>
+          <div className="text-sm opacity-80">{description}</div>
         </div>
       </div>
       <div className="flex flex-col items-end justify-start md:justify-center">
-        <div className="bg-muted text-muted-foreground min-w-[92px] rounded-3xl px-2 py-1 text-xs font-medium">
+        <div className="bg-secondary text-secondary-foreground min-w-[92px] rounded-md px-3 py-1.5 text-xs font-medium">
           Coming soon
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
